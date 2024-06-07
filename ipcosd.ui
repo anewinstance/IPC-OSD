@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>798</width>
-    <height>488</height>
+    <width>878</width>
+    <height>486</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
      <rect>
       <x>20</x>
       <y>20</y>
-      <width>261</width>
+      <width>321</width>
       <height>411</height>
      </rect>
     </property>
@@ -30,11 +30,14 @@
    <widget class="QProgressBar" name="songprogress">
     <property name="geometry">
      <rect>
-      <x>320</x>
+      <x>410</x>
       <y>120</y>
       <width>441</width>
       <height>23</height>
      </rect>
+    </property>
+    <property name="maximum">
+     <number>100</number>
     </property>
     <property name="value">
      <number>0</number>
@@ -49,7 +52,7 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>320</x>
+      <x>380</x>
       <y>100</y>
       <width>71</width>
       <height>16</height>
@@ -62,9 +65,9 @@
    <widget class="QPushButton" name="startb">
     <property name="geometry">
      <rect>
-      <x>320</x>
+      <x>390</x>
       <y>400</y>
-      <width>81</width>
+      <width>91</width>
       <height>31</height>
      </rect>
     </property>
@@ -75,9 +78,9 @@
    <widget class="QPushButton" name="stopb">
     <property name="geometry">
      <rect>
-      <x>320</x>
+      <x>390</x>
       <y>440</y>
-      <width>81</width>
+      <width>91</width>
       <height>31</height>
      </rect>
     </property>
@@ -88,7 +91,7 @@
    <widget class="QRadioButton" name="orderrand">
     <property name="geometry">
      <rect>
-      <x>320</x>
+      <x>370</x>
       <y>220</y>
       <width>89</width>
       <height>21</height>
@@ -101,7 +104,7 @@
    <widget class="QRadioButton" name="orderline">
     <property name="geometry">
      <rect>
-      <x>320</x>
+      <x>370</x>
       <y>250</y>
       <width>89</width>
       <height>16</height>
@@ -117,7 +120,7 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>320</x>
+      <x>380</x>
       <y>20</y>
       <width>91</width>
       <height>21</height>
@@ -136,7 +139,7 @@
    <widget class="QLabel" name="currentsongl">
     <property name="geometry">
      <rect>
-      <x>320</x>
+      <x>410</x>
       <y>50</y>
       <width>421</width>
       <height>31</height>
@@ -154,7 +157,7 @@
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>320</x>
+      <x>370</x>
       <y>190</y>
       <width>81</width>
       <height>21</height>
@@ -167,7 +170,7 @@
    <widget class="Line" name="line">
     <property name="geometry">
      <rect>
-      <x>290</x>
+      <x>350</x>
       <y>0</y>
       <width>20</width>
       <height>481</height>
@@ -180,9 +183,9 @@
    <widget class="Line" name="line_3">
     <property name="geometry">
      <rect>
-      <x>300</x>
+      <x>360</x>
       <y>160</y>
-      <width>491</width>
+      <width>521</width>
       <height>21</height>
      </rect>
     </property>
@@ -193,7 +196,7 @@
    <widget class="QLineEdit" name="ipcip">
     <property name="geometry">
      <rect>
-      <x>440</x>
+      <x>530</x>
       <y>200</y>
       <width>141</width>
       <height>20</height>
@@ -203,7 +206,7 @@
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>440</x>
+      <x>530</x>
       <y>180</y>
       <width>111</width>
       <height>20</height>
@@ -219,7 +222,7 @@
    <widget class="QPushButton" name="testipc">
     <property name="geometry">
      <rect>
-      <x>440</x>
+      <x>530</x>
       <y>230</y>
       <width>141</width>
       <height>23</height>
@@ -234,7 +237,7 @@
      <rect>
       <x>20</x>
       <y>440</y>
-      <width>61</width>
+      <width>71</width>
       <height>31</height>
      </rect>
     </property>
@@ -245,7 +248,7 @@
    <widget class="Line" name="line_4">
     <property name="geometry">
      <rect>
-      <x>410</x>
+      <x>500</x>
       <y>170</y>
       <width>16</width>
       <height>311</height>
@@ -258,7 +261,7 @@
    <widget class="QLabel" name="label_6">
     <property name="geometry">
      <rect>
-      <x>620</x>
+      <x>710</x>
       <y>180</y>
       <width>111</width>
       <height>16</height>
@@ -274,7 +277,7 @@
    <widget class="QLabel" name="ipcstatus">
     <property name="geometry">
      <rect>
-      <x>640</x>
+      <x>730</x>
       <y>200</y>
       <width>111</width>
       <height>51</height>
@@ -295,7 +298,7 @@
    <widget class="QLabel" name="songscnt">
     <property name="geometry">
      <rect>
-      <x>690</x>
+      <x>750</x>
       <y>20</y>
       <width>71</width>
       <height>20</height>
@@ -311,7 +314,7 @@
    <widget class="QPlainTextEdit" name="logarea">
     <property name="geometry">
      <rect>
-      <x>430</x>
+      <x>520</x>
       <y>300</y>
       <width>351</width>
       <height>171</height>
@@ -327,7 +330,7 @@
    <widget class="QLabel" name="label_9">
     <property name="geometry">
      <rect>
-      <x>430</x>
+      <x>520</x>
       <y>280</y>
       <width>54</width>
       <height>12</height>
@@ -340,7 +343,7 @@
    <widget class="Line" name="line_2">
     <property name="geometry">
      <rect>
-      <x>420</x>
+      <x>510</x>
       <y>260</y>
       <width>371</width>
       <height>16</height>
@@ -353,7 +356,7 @@
    <widget class="Line" name="line_5">
     <property name="geometry">
      <rect>
-      <x>600</x>
+      <x>690</x>
       <y>170</y>
       <width>16</width>
       <height>101</height>
@@ -366,9 +369,9 @@
    <widget class="QCheckBox" name="pastesysstatus">
     <property name="geometry">
      <rect>
-      <x>320</x>
+      <x>370</x>
       <y>280</y>
-      <width>101</width>
+      <width>131</width>
       <height>16</height>
      </rect>
     </property>
@@ -379,9 +382,9 @@
    <widget class="QPushButton" name="nextsongb">
     <property name="geometry">
      <rect>
-      <x>320</x>
+      <x>390</x>
       <y>320</y>
-      <width>81</width>
+      <width>91</width>
       <height>31</height>
      </rect>
     </property>
@@ -392,9 +395,9 @@
    <widget class="QPushButton" name="prevsongb">
     <property name="geometry">
      <rect>
-      <x>320</x>
+      <x>390</x>
       <y>360</y>
-      <width>81</width>
+      <width>91</width>
       <height>31</height>
      </rect>
     </property>
@@ -405,9 +408,9 @@
    <widget class="QPushButton" name="removeallb">
     <property name="geometry">
      <rect>
-      <x>240</x>
+      <x>290</x>
       <y>440</y>
-      <width>41</width>
+      <width>51</width>
       <height>31</height>
      </rect>
     </property>
@@ -418,9 +421,9 @@
    <widget class="QPushButton" name="loadforder">
     <property name="geometry">
      <rect>
-      <x>90</x>
+      <x>100</x>
       <y>440</y>
-      <width>71</width>
+      <width>91</width>
       <height>31</height>
      </rect>
     </property>
@@ -431,14 +434,30 @@
    <widget class="QPushButton" name="removesingleb">
     <property name="geometry">
      <rect>
-      <x>170</x>
+      <x>200</x>
       <y>440</y>
-      <width>61</width>
+      <width>81</width>
       <height>31</height>
      </rect>
     </property>
     <property name="text">
      <string>移除单首</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>120</y>
+      <width>191</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>NOT AVAIL ON RPI</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
   </widget>

@@ -40,8 +40,11 @@ def updateSYSState():
         stateUPDT.stop()
 
 def getSYSState():
-    mem=psutil.virtual_memory()
-    return f"MEM:{mem.percent}%"
+    currentTemp=-1
+    with open("/sys/class/thermal/thermal_zone0/temp","r") as tf:
+        currentTemp=tf.read().strip()
+    #print(currentTemp)
+    return f"CPU:{(int(currentTemp)//100)/10}'C"
 
 def addLog(level:int,logcontext:str):
     '''
@@ -214,8 +217,10 @@ def updateCurrentSong():
 
 def updateProcess():
     global mwindui,mmplayer,mmplaylist
+    #print("duration",mmplayer.duration())
     mwindui.songprogress.setMaximum(mmplayer.duration())
     mwindui.songprogress.setValue(mmplayer.position())
+    #print(mmplayer.duration(),mmplayer.position())
 
 mapp=QApplication(sys.argv)
 mwind=QMainWindow()
@@ -242,5 +247,8 @@ stateUPDT.timeout.connect(updateSYSState)
 mwindui.pastesysstatus.stateChanged.connect(lambda:updateSYSState())
 #stateUPDT.start(1000)
 initPrepare()
+
+mwindui.songprogress.setValue(2)
+
 mwind.show()
 sys.exit(mapp.exec_())
