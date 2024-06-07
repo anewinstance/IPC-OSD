@@ -16,6 +16,7 @@ mmplaylist=QMediaPlaylist()
 mmplayer=QMediaPlayer()
 mmplayer.setPlaylist(mmplaylist)
 validMediaFormart=["mp3","wav","m4a","aac","ogg","wma"]
+IPC_ok=False
 
 def addLog(level:int,logcontext:str):
     '''
@@ -43,6 +44,7 @@ def initPrepare():
     global mwindui
     initPlayList()
     mwindui.logarea.clear()
+    mwindui.ipcstatus.setStyleSheet(f"color:{'red'};")
     addLog(0,"初始化完成")
 
 def removeSong():
@@ -108,8 +110,14 @@ def setipcstatus(status:str):
     mwindui.ipcstatus.setText(status)
     mwindui.ipcstatus.setStyleSheet(f"color:{'green' if status=='正常' else 'red'};")
 
+def needReverify():
+    global IPC_ok
+    IPC_ok=False
+    mmplayer.stop()
+    setipcstatus("未知")
+
 def testIP():
-    global mwindui
+    global mwindui,IPC_ok
     currip=mwindui.ipcip.text()
     if currip=="":
         addLog(1,"我认为你应该在IP栏写点什么")
@@ -123,6 +131,7 @@ def testIP():
             if testresult[0]==200:
                 addLog(0,f"状态码:{testresult[0]},成功")
                 setipcstatus("正常")
+                IPC_ok=True
             elif testresult[0]=="ERR":
                 addLog(1,f"连接错误,{testresult[1]}")
                 setipcstatus("错误")
@@ -132,16 +141,25 @@ def testIP():
         else:
             addLog(1,"IP地址格式错误")
 
+def dcSwitch():
+    global mmplaylist
+    mmplaylist.setCurrentIndex(mwindui.songlist.currentIndex().row())
+
 def startplay():
     global mwindui,AllSongs
-    if len(AllSongs)!=0:
-        mmplayer.play()
-        addLog(0,"开始播放")
-        #updateCurrentSong()
-        #updateProcess()
+    if IPC_ok:
+        if len(AllSongs)!=0:
+            mmplayer.play()
+            addLog(0,"开始播放")
+            updateCurrentSong()
+            #updateProcess()
+    else:
+        addLog(1,"请先测试与IPC的连接")
 
 us_flag_ft=1
 def updateCurrentSong():
+    if not IPC_ok:
+        return
     global mwindui,us_flag_ft
     if mwindui.orderrand.isChecked():
         us_flag_ft=0
@@ -158,7 +176,9 @@ def updateCurrentSong():
             mwindui.songscnt.setText(f"{mmplaylist.currentIndex()+1}/{mmplaylist.mediaCount()}")
             #print(mmplaylist.currentMedia().canonicalUrl().path()[1::])
             addLog(0,f"当前播放: {mmplaylist.currentMedia().canonicalUrl().fileName()}")
+            changeosd.uosd(mwindui.ipcip.text(),"当前播放:",f"{mmplaylist.currentMedia().canonicalUrl().fileName()[0:30]}","HW INFO")
         us_flag_ft=1
+
 def updateProcess():
     global mwindui,mmplayer,mmplaylist
     mwindui.songprogress.setMaximum(mmplayer.duration())
@@ -175,11 +195,13 @@ mwindui.removeallb.clicked.connect(removeAllSongs)
 #mwindui.testipc.clicked.connect(lambda:threading.Thread(target=testIP,daemon=True).start())
 mwindui.testipc.clicked.connect(testIP)
 mwindui.loadforder.clicked.connect(addSongsFromForder)
+mwindui.ipcip.textChanged.connect(needReverify)
 
 mwindui.startb.clicked.connect(startplay)
 mwindui.nextsongb.clicked.connect(mmplaylist.next)
 mwindui.prevsongb.clicked.connect(mmplaylist.previous)
 mwindui.stopb.clicked.connect(mmplayer.stop)
+mwindui.songlist.doubleClicked.connect(mmplayer.play)
 
 mmplaylist.currentIndexChanged.connect(lambda:updateCurrentSong())
 mmplayer.positionChanged.connect(lambda:updateProcess())

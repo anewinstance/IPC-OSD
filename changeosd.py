@@ -33,8 +33,8 @@ def testconn(ipcip):
         <imageOsd>
         <time>
         <switch type="boolean">true</switch>
-        <X type="uint32">6600</X>
-        <Y type="uint32">200</Y>
+        <X type="uint32">6700</X>
+        <Y type="uint32">300</Y>
         <dateFormat type="dateFormat">year-month-day</dateFormat>
         </time>
         <channelName>
@@ -57,7 +57,8 @@ def testconn(ipcip):
         <switch type="boolean">true</switch>
         <X type="uint32">750</X>
         <Y type="uint32">8100</Y>
-        <value type="string" maxLen="32"><![CDATA[{content1}]]></value>
+        <value type="string" maxLen="32"><![CDATA[当前播放:
+        ]]></value>
         <showLevel type="uint32">0</showLevel>
         <flickerSwitch type="boolean">false</flickerSwitch>
         <osdOverlayType type="osdOverlayType">TEXT</osdOverlayType>
@@ -66,16 +67,17 @@ def testconn(ipcip):
         <switch type="boolean">true</switch>
         <X type="uint32">800</X>
         <Y type="uint32">1100</Y>
-        <value type="string" maxLen="15"><![CDATA[{content2}]]></value>
+        <value type="string" maxLen="15"><![CDATA[HW INFO]]></value>
         <showLevel type="uint32">0</showLevel>
         <flickerSwitch type="boolean">false</flickerSwitch>
         <osdOverlayType type="osdOverlayType">TEXT</osdOverlayType>
         </item>
         <item>
-        <switch type="boolean">false</switch>
-        <X type="uint32">75</X>
-        <Y type="uint32">4800</Y>
-        <value type="string" maxLen="15"></value>
+        <switch type="boolean">true</switch>
+        <X type="uint32">800</X>
+        <Y type="uint32">8666</Y>
+        <value type="string" maxLen="32"><![CDATA[我是歌名
+        ]]></value>
         <showLevel type="uint32">0</showLevel>
         <flickerSwitch type="boolean">false</flickerSwitch>
         <osdOverlayType type="osdOverlayType">TEXT</osdOverlayType>
@@ -91,7 +93,7 @@ def testconn(ipcip):
     except Exception as e:
         return "ERR",e
 
-def uosd(ipcip,content1,content2):
+def uosd(ipcip,content1,content2,content3):
     headers={
         "Accept": "*/*",
         "Accept-Language": "zh-Hans-CN, zh-Hans; q=0.8, en-US; q=0.5, en; q=0.2",
@@ -120,8 +122,8 @@ def uosd(ipcip,content1,content2):
         <imageOsd>
         <time>
         <switch type="boolean">true</switch>
-        <X type="uint32">6600</X>
-        <Y type="uint32">200</Y>
+        <X type="uint32">6700</X>
+        <Y type="uint32">300</Y>
         <dateFormat type="dateFormat">year-month-day</dateFormat>
         </time>
         <channelName>
@@ -153,16 +155,16 @@ def uosd(ipcip,content1,content2):
         <switch type="boolean">true</switch>
         <X type="uint32">800</X>
         <Y type="uint32">1100</Y>
-        <value type="string" maxLen="15"><![CDATA[{content2}]]></value>
+        <value type="string" maxLen="15"><![CDATA[{content3}]]></value>
         <showLevel type="uint32">0</showLevel>
         <flickerSwitch type="boolean">false</flickerSwitch>
         <osdOverlayType type="osdOverlayType">TEXT</osdOverlayType>
         </item>
         <item>
-        <switch type="boolean">false</switch>
-        <X type="uint32">75</X>
-        <Y type="uint32">4800</Y>
-        <value type="string" maxLen="15"></value>
+        <switch type="boolean">true</switch>
+        <X type="uint32">800</X>
+        <Y type="uint32">8666</Y>
+        <value type="string" maxLen="32"><![CDATA[{content2}]]></value>
         <showLevel type="uint32">0</showLevel>
         <flickerSwitch type="boolean">false</flickerSwitch>
         <osdOverlayType type="osdOverlayType">TEXT</osdOverlayType>
