@@ -6,6 +6,7 @@ import sys
 import os
 import time
 import random
+import psutil
 
 import iposdui
 import changeosd
@@ -15,8 +16,32 @@ AllSongs=[]
 mmplaylist=QMediaPlaylist()
 mmplayer=QMediaPlayer()
 mmplayer.setPlaylist(mmplaylist)
+stateUPDT=QTimer()
 validMediaFormart=["mp3","wav","m4a","aac","ogg","wma"]
 IPC_ok=False
+sysState=""
+
+def updateSYSState():
+    global mmplayer,stateUPDT
+    #print("updating")
+    if mwindui.pastesysstatus.isChecked() and not stateUPDT.isActive():
+        stateUPDT.start(1000)
+    if not mwindui.pastesysstatus.isChecked():
+        stateUPDT.stop()
+    if mmplayer.state()==QMediaPlayer.PlayingState:
+        cresult=changeosd.uosd(
+                mwindui.ipcip.text(),
+                "当前播放:",
+                f"{mmplaylist.currentMedia().canonicalUrl().fileName().replace('.mp3','')[0:30]}{'>' if len(mmplaylist.currentMedia().canonicalUrl().fileName().replace('.mp3',''))>30 else ''}",
+                f"HW: {getSYSState() if mwindui.pastesysstatus.isChecked()  else 'INOP'}",)
+        if cresult!=200:
+            needReverify()
+    else:
+        stateUPDT.stop()
+
+def getSYSState():
+    mem=psutil.virtual_memory()
+    return f"MEM:{mem.percent}%"
 
 def addLog(level:int,logcontext:str):
     '''
@@ -144,15 +169,17 @@ def testIP():
 def dcSwitch():
     global mmplaylist
     mmplaylist.setCurrentIndex(mwindui.songlist.currentIndex().row())
+    startplay()
 
 def startplay():
-    global mwindui,AllSongs
+    global mwindui,AllSongs,stateUPDT
     if IPC_ok:
         if len(AllSongs)!=0:
             mmplayer.play()
             addLog(0,"开始播放")
             updateCurrentSong()
             #updateProcess()
+            stateUPDT.start(1000)
     else:
         addLog(1,"请先测试与IPC的连接")
 
@@ -176,7 +203,13 @@ def updateCurrentSong():
             mwindui.songscnt.setText(f"{mmplaylist.currentIndex()+1}/{mmplaylist.mediaCount()}")
             #print(mmplaylist.currentMedia().canonicalUrl().path()[1::])
             addLog(0,f"当前播放: {mmplaylist.currentMedia().canonicalUrl().fileName()}")
-            changeosd.uosd(mwindui.ipcip.text(),"当前播放:",f"{mmplaylist.currentMedia().canonicalUrl().fileName()[0:30]}","HW INFO")
+            cresult=changeosd.uosd(
+                mwindui.ipcip.text(),
+                "当前播放:",
+                f"{mmplaylist.currentMedia().canonicalUrl().fileName().replace('.mp3','')[0:30]}{'>' if len(mmplaylist.currentMedia().canonicalUrl().fileName().replace('.mp3',''))>30 else ''}",
+                f"HW: {getSYSState() if mwindui.pastesysstatus.isChecked()  else 'INOP'}",)
+            if cresult!=200:
+                needReverify()
         us_flag_ft=1
 
 def updateProcess():
@@ -201,12 +234,13 @@ mwindui.startb.clicked.connect(startplay)
 mwindui.nextsongb.clicked.connect(mmplaylist.next)
 mwindui.prevsongb.clicked.connect(mmplaylist.previous)
 mwindui.stopb.clicked.connect(mmplayer.stop)
-mwindui.songlist.doubleClicked.connect(mmplayer.play)
+mwindui.songlist.doubleClicked.connect(dcSwitch)
 
 mmplaylist.currentIndexChanged.connect(lambda:updateCurrentSong())
 mmplayer.positionChanged.connect(lambda:updateProcess())
-
-
+stateUPDT.timeout.connect(updateSYSState)
+mwindui.pastesysstatus.stateChanged.connect(lambda:updateSYSState())
+#stateUPDT.start(1000)
 initPrepare()
 mwind.show()
 sys.exit(mapp.exec_())

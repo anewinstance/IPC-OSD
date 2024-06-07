@@ -174,10 +174,11 @@ def uosd(ipcip,content1,content2,content3):
         </config>
     '''
     url=f"http://{ipcip}/SetImageOsdConfig"
-
-    response = requests.post(url, data=info.encode("utf-8"), headers=headers,verify=False)
-
-    return response.status_code
+    try:
+        response = requests.post(url, data=info.encode("utf-8"), headers=headers,verify=False)
+        return response.status_code
+    except Exception as e:
+        return e
 
 if __name__ == '__main__':
     print(uosd("192.168.0.201","正在播放:\n无限无线无限无限无限无限无限无","CPU"))
