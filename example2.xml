@@ -1,0 +1,65 @@
+<config xmlns="http://www.ipc.com/ver10" version="1.7">
+        <types>
+        <dateFormat>
+        <enum>year-month-day</enum>
+        <enum>month-day-year</enum>
+        <enum>day-month-year</enum>
+        </dateFormat>
+        <osdOverlayType>
+        <enum>TEXT</enum>
+        <enum>IMAGE</enum>
+        </osdOverlayType>
+        </types>
+        <imageOsd>
+        <time>
+        <switch type="boolean">true</switch>
+        <X type="uint32">6600</X>
+        <Y type="uint32">200</Y>
+        <dateFormat type="dateFormat">year-month-day</dateFormat>
+        </time>
+        <channelName>
+        <switch type="boolean">false</switch>
+        <X type="uint32">75</X>
+        <Y type="uint32">100</Y>
+        <name type="string" maxLen="18"><![CDATA[IPC]]></name>
+        </channelName>
+        <textOverLay type="list" count="4">
+        <item>
+        <switch type="boolean">false</switch>
+        <X type="uint32">75</X>
+        <Y type="uint32">900</Y>
+        <value type="string" maxLen="15"></value>
+        <showLevel type="uint32">0</showLevel>
+        <flickerSwitch type="boolean">false</flickerSwitch>
+        <osdOverlayType type="osdOverlayType">TEXT</osdOverlayType>
+        </item>
+        <item>
+        <switch type="boolean">true</switch>
+        <X type="uint32">750</X>
+        <Y type="uint32">8100</Y>
+        <value type="string" maxLen="32"><![CDATA[{content1}]]></value>
+        <showLevel type="uint32">0</showLevel>
+        <flickerSwitch type="boolean">false</flickerSwitch>
+        <osdOverlayType type="osdOverlayType">TEXT</osdOverlayType>
+        </item>
+        <item>
+        <switch type="boolean">true</switch>
+        <X type="uint32">800</X>
+        <Y type="uint32">1100</Y>
+        <value type="string" maxLen="15"><![CDATA[{content2}]]></value>
+        <showLevel type="uint32">0</showLevel>
+        <flickerSwitch type="boolean">false</flickerSwitch>
+        <osdOverlayType type="osdOverlayType">TEXT</osdOverlayType>
+        </item>
+        <item>
+        <switch type="boolean">false</switch>
+        <X type="uint32">75</X>
+        <Y type="uint32">4800</Y>
+        <value type="string" maxLen="15"></value>
+        <showLevel type="uint32">0</showLevel>
+        <flickerSwitch type="boolean">false</flickerSwitch>
+        <osdOverlayType type="osdOverlayType">TEXT</osdOverlayType>
+        </item>
+        </textOverLay>
+        </imageOsd>
+        </config>
