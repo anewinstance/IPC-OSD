@@ -23,7 +23,6 @@ sysState=""
 
 def updateSYSState():
     global mmplayer,stateUPDT
-    #print("updating")
     if mwindui.pastesysstatus.isChecked() and not stateUPDT.isActive():
         stateUPDT.start(1000)
     if not mwindui.pastesysstatus.isChecked():
@@ -236,11 +235,13 @@ mwindui.prevsongb.clicked.connect(mmplaylist.previous)
 mwindui.stopb.clicked.connect(mmplayer.stop)
 mwindui.songlist.doubleClicked.connect(dcSwitch)
 
-mmplaylist.currentIndexChanged.connect(lambda:updateCurrentSong())
-mmplayer.positionChanged.connect(lambda:updateProcess())
+mmplaylist.currentIndexChanged.connect(updateCurrentSong)
+mmplayer.positionChanged.connect(updateProcess)
 stateUPDT.timeout.connect(updateSYSState)
-mwindui.pastesysstatus.stateChanged.connect(lambda:updateSYSState())
+mwindui.pastesysstatus.stateChanged.connect(updateSYSState)
 #stateUPDT.start(1000)
+
 initPrepare()
+
 mwind.show()
 sys.exit(mapp.exec_())
