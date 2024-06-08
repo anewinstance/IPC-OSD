@@ -23,7 +23,6 @@ sysState=""
 
 def updateSYSState():
     global mmplayer,stateUPDT
-    #print("updating")
     if mwindui.pastesysstatus.isChecked() and not stateUPDT.isActive():
         stateUPDT.start(1000)
     if not mwindui.pastesysstatus.isChecked():
@@ -189,7 +188,7 @@ def startplay():
 
 us_flag_ft=1
 def updateCurrentSong():
-    print(mmplaylist.currentIndex())
+    #print(mmplaylist.currentIndex())
     if not IPC_ok:
         return
     global mwindui,us_flag_ft
