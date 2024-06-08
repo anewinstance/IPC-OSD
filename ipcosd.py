@@ -178,6 +178,7 @@ def startplay():
     global mwindui,AllSongs,stateUPDT
     if IPC_ok:
         if len(AllSongs)!=0:
+            mmplaylist.setCurrentIndex(mwindui.songlist.currentIndex().row())
             mmplayer.play()
             addLog(0,"开始播放")
             updateCurrentSong()
@@ -188,6 +189,7 @@ def startplay():
 
 us_flag_ft=1
 def updateCurrentSong():
+    print(mmplaylist.currentIndex())
     if not IPC_ok:
         return
     global mwindui,us_flag_ft
